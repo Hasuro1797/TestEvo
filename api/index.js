@@ -3,7 +3,7 @@ const { conn } = require('./src/db.js');
 const createUser = require('./src/utils/createUser');
 
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
