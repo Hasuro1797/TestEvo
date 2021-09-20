@@ -14,6 +14,12 @@ const FeedsContainer = styled.div`
     padding: 15px 0px;
     
 `;
+const FeedNotResult = styled.div`
+    width: 100%;
+    background-color: #5c5c5c;
+    height: 441px;
+    text-align: center;
+`;
 const Feeds = () => {
     const { feeds, user } = useAuth();
     return feeds.length !== 0 ?(
@@ -36,9 +42,9 @@ const Feeds = () => {
             }
         </FeedsContainer>
     ):(
-        <>
-            No hay publicaciones
-        </>
+        <FeedNotResult>
+            <span>No hay publicaciones</span>
+        </FeedNotResult>
     )
 }
 
