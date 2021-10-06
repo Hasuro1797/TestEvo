@@ -17,7 +17,7 @@ const ButtonStyle = styled.button`
     }
 `;
 
-const Button = ({ type = "submit", text, handleClick}) => {
+const Button = ({ type = "submit", text, handleClick, isSubmitting}) => {
     return type !== "submit" ? (
         <>
             <ButtonStyle 
@@ -31,6 +31,7 @@ const Button = ({ type = "submit", text, handleClick}) => {
         <>
             <ButtonStyle 
                 type={type}
+                disabled={isSubmitting}
             >
                 {text}
             </ButtonStyle>

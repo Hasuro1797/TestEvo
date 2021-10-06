@@ -1,13 +1,13 @@
 import React from "react";
-import { logInUser } from "../redux/actions/userActions";
-import { useLocation, useHistory } from "react-router";
 import styled from "styled-components";
-import Input from "../components/Input";
-import Button from "../components/Button";
 import { Formik, Form, ErrorMessage } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import Input from "../components/Input";
 import routes from "../helpers/routes";
+import { useHistory, useLocation } from "react-router";
+import { useDispatch } from "react-redux";
+import Button from "../components/Button";
+import { registerUser } from "../redux/actions/userActions";
+import { Link } from "react-router-dom";
 
 const LogInContainer = styled.div`
 	height: calc(100vh - 60px);
@@ -51,15 +51,17 @@ const MessageRegister = styled.div`
 		color: blue;
 	}
 `;
-const LoginPage = () => {
+
+const RegisterPage = () => {
 	const location = useLocation();
 	const history = useHistory();
 	const dispatch = useDispatch();
-	// const errorAuth = useSelector(state => state.errorAuth)
 	return (
 		<LogInContainer>
 			<Formik
 				initialValues={{
+					name: "",
+					lastName: "",
 					email: "",
 					password: "",
 				}}
@@ -77,10 +79,16 @@ const LoginPage = () => {
 					if (!input.password) {
 						errors.password = "El password es requerido";
 					}
+					if (!input.name) {
+						errors.name = "El nombre es requerido";
+					}
+					if (!input.lastName) {
+						errors.lastName = "Los apellidos son requeridos.";
+					}
 					return errors;
 				}}
 				onSubmit={(valores, { setSubmitting }) => {
-					dispatch(logInUser(valores));
+					dispatch(registerUser(valores));
 					if (location.state?.from) history.push(location.state?.from);
 					setTimeout(() => {
 						setSubmitting(false);
@@ -96,9 +104,37 @@ const LoginPage = () => {
 					isSubmitting,
 				}) => (
 					<FormStyle onSubmit={handleSubmit}>
-						<h2>Iniciar Sesión</h2>
+						<h2>Registrarse</h2>
 						<Input
-							label="Corre0 Electronico"
+							label="Nombre(s)"
+							type="text"
+							name="name"
+							handleChange={handleChange}
+							onBlur={handleBlur}
+							value={values.name}
+						/>
+						<TextError>
+							<ErrorMessage
+								name="name"
+								component={() => <p>{errors.name}</p>}
+							/>
+						</TextError>
+						<Input
+							label="Apellidos"
+							type="text"
+							name="lastName"
+							handleChange={handleChange}
+							onBlur={handleBlur}
+							value={values.lastName}
+						/>
+						<TextError>
+							<ErrorMessage
+								name="lastName"
+								component={() => <p>{errors.lastName}</p>}
+							/>
+						</TextError>
+						<Input
+							label="Correo Electronico"
 							type="email"
 							name="email"
 							handleChange={handleChange}
@@ -112,7 +148,7 @@ const LoginPage = () => {
 							/>
 						</TextError>
 						<Input
-							label="Password "
+							label="Contraseña"
 							type="password"
 							name="password"
 							handleChange={handleChange}
@@ -126,12 +162,12 @@ const LoginPage = () => {
 							/>
 						</TextError>
 						<MessageRegister>
-							<span>¿Aun no tienes cuenta? </span>
-							<Link to={routes.register}>
-								<span> Registrate</span>
+							<span>¿Ya tienes cuenta? </span>
+							<Link to={routes.login}>
+								<span> Iniciar Sesión</span>
 							</Link>
 						</MessageRegister>
-						<Button text="Iniciar Sesion" isSubmitting={isSubmitting} />
+						<Button text="Registrarse" isSubmitting={isSubmitting} />
 						{/* {
                             (errorAuth) ? 
                                 <ErrorLogIn>
@@ -146,4 +182,4 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;

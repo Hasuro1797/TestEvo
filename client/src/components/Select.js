@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {BsThreeDotsVertical} from 'react-icons/bs'
-import useAuth from '../auth/useAuth';
+import {BsThreeDotsVertical} from 'react-icons/bs';
 import Modal from './Modal';
 import Input from './Input';
+import { useSelector } from 'react-redux';
 
 const SelectContainer = styled.div`
     flex: 0.1;
@@ -123,7 +123,7 @@ const SelectField = styled.div`
     }
 `;
 const Select = ({ items, setShow, show, feedId }) => {
-    const {user, deleteFeed, updateFeed } = useAuth();
+    const user = useSelector(state => state.auth.user);
     const [showModal, setShowModal] = useState(false);
     const [input, setInput] = useState({
         title: '',
@@ -148,7 +148,7 @@ const Select = ({ items, setShow, show, feedId }) => {
     }
     const handleSubmit = (e) =>{
         e.preventDefault();
-        updateFeed({...input, userId: user.user.id, feedId})
+        // updateFeed({...input, userId: user.user.id, feedId})
         setShowModal(!showModal);
         setInput({
             title: '',
@@ -161,10 +161,10 @@ const Select = ({ items, setShow, show, feedId }) => {
     }
     const handleClick = (value) =>(e)=>{
         if(value === "eliminar"){
-            deleteFeed({
-                userId: user.user.id,
-                feedId
-            })
+            // deleteFeed({
+            //     userId: user.user.id,
+            //     feedId
+            // })
             setShow(false);
         }else if(value === "editar"){
             setShowModal(!showModal);

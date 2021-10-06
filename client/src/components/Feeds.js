@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import useAuth from '../auth/useAuth';
 import Feed from './Feed';
 
 const FeedsContainer = styled.div`
@@ -20,16 +19,16 @@ const FeedNotResult = styled.div`
     height: 441px;
     text-align: center;
 `;
-const Feeds = () => {
-    const { feeds, user } = useAuth();
+const Feeds = ({feeds, userInfo }) => {
+    console.log(userInfo);
     return feeds.length !== 0 ?(
         <FeedsContainer>
             {
                 feeds.map(feed =>(
                     <Feed
                         key={feed.id}
-                        name={user.user.profile.name}
-                        lastName={user.user.profile.lastName}
+                        name={userInfo.profile?.name}
+                        lastName={userInfo.profile?.lastName}
                         feedId ={feed.id}
                         title={feed.title}
                         description={feed.description}

@@ -1,63 +1,72 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const InputContainer = styled.div`
     position: relative;
     width: 100%;
-    margin: 15px 0px 20px 0px;
-    & label{
-        position:absolute;
-        top: ${(props) => props.chance ? "-15px": props.value? "-15px": "10px"};
-        font-size:${(props) => props.chance? "0.8em": props.value? "0.8em": "1em"};
-        color: white;
-        transition: 0.1s ease-in;
-        cursor: text;
-        left: 8px;
-    }
-    & input{
-        border: 2px solid white;
+    height: 40px;
+    margin: 1rem 0;
+
+    & input {
         width: 100%;
         height: 40px;
-        padding: 8px;
-        font-size: 15px;
-        border-radius: 6px;
-        color: white;
+        outline: none;
+        font-size: 16px;
+        border: 2px solid white;
         background-color: transparent;
+        border-radius: 20px;
+        color: white;
+        padding-left: 15px;
+        transition: .3s ease all
     }
     & input:focus{
-        border: 2px solid rgb(76, 76, 209);
-        transition: 0.1s ease all;
+        border-color: #176ceb;
     }
+    & label {
+        position: absolute;
+        bottom: 11px;
+        left: 17px;
+        pointer-events: none;
+        font-size: 16px;
+        color: white;
+        transition: .3s ease all;
+    }
+    & input:focus ~ label,
+    & input:not(:placeholder-shown)~ label{
+        transform: translateY(-30px);
+        color: #176ceb;
+        font-size: 13px;
+        background-color: transparent;
+    }
+    
 `;
 
 const Input = (
     { 
         type,
         value, 
-        handleChange, 
-        autocomplete = "off", 
+        handleChange,
         name, 
         label,
         handleBlur
     }) => {
-        const [focus, setFocus] = useState(false);
     return (
-        <InputContainer chance={focus} value={value}>
-            <label 
-                htmlFor={name}
-                >
-                    {label}
-                </label>
-            <input 
+        <InputContainer value={value}>
+            <input
                 type={type}
                 value={value} 
                 name = {name}
                 id = {name}
                 onChange ={handleChange}
-                autoComplete ={autocomplete}
-                onFocus={() => setFocus(true) }
+                autoComplete = "off"
                 onBlur ={handleBlur}
+                placeholder=" "
+                required
                 />
+            <label 
+                htmlFor={name}
+                >
+                    {label}
+            </label>
         </InputContainer>
     )
 }
