@@ -4,15 +4,16 @@ const { deleteFeed } = require('./middlewares/feed/deleteFeed');
 const { putFeed } = require('./middlewares/feed/putFeed');
 const { postFeed } = require('./middlewares/feed/postFeed');
 const { getFeed } = require('./middlewares/feed/getFeed');
+const authorization  = require('./middlewares/user/authorization');
 
 
-router.post('/', postFeed);
+router.post('/', authorization, postFeed);
 
-router.put('/',putFeed);
+router.put('/', authorization, putFeed);
 
-router.delete('/', deleteFeed);
+router.delete('/', authorization, deleteFeed);
 
-router.get('/', getFeed)
+router.get('/', authorization, getFeed);
 
 
 module.exports = router;

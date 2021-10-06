@@ -12,7 +12,7 @@ const createUser = () =>{
                     name: "Señor",
                     lastName: "Usuario"
                 })
-                await profile.setUsuario(user.id);
+                await profile.setUsuario(user.email);
             } catch (error) {
                 console.error("hubo un error", error);
             }

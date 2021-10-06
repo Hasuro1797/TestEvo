@@ -1,7 +1,7 @@
-const { User, Feed } = require('../../../db.js');
+const { Feed } = require('../../../db.js');
 
 const putFeed = async (req,res,next) =>{
-    const { userId, feedId, title, price, status, payment, img, description } = req.body;
+    const { feedId, title, price, status, payment, img, description } = req.body;
     try {
         if(title){
             await Feed.update({
@@ -59,10 +59,10 @@ const putFeed = async (req,res,next) =>{
         }
         const feeds = await Feed.findAll({
             where:{
-                usuarioId: userId
+                usuarioId: req.user
             }
         })
-        res.send({feeds: feeds})
+        res.send({feeds})
     } catch (error) {
         next(error)
     }

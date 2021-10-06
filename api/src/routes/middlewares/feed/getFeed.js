@@ -1,14 +1,13 @@
 const { Feed } = require('../../../db.js');
 
 const getFeed = async(req,res,next) =>{
-    const {user} = req.query;
     try {
         const feeds = await Feed.findAll({
             where:{
-                usuarioId: user
+                usuarioEmail: req.user
             }
         })
-        res.send(feeds)
+        res.json({ feeds });
     } catch (error) {
         next(error)
     }
