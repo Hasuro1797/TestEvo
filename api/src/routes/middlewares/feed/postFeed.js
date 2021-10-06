@@ -2,7 +2,6 @@ const { Feed } = require("../../../db.js");
 
 const postFeed = async (req, res, next) => {
 	const { title, price, status, payment, img, description } = req.body;
-	console.log(req.body);
 	try {
 		if (title && price && status && img && description) {
 			const feed = await Feed.create({
