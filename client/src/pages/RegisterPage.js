@@ -4,7 +4,7 @@ import { Formik, Form, ErrorMessage } from "formik";
 import Input from "../components/Input";
 import routes from "../helpers/routes";
 import { useHistory, useLocation } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../components/Button";
 import { registerUser } from "../redux/actions/userActions";
 import { Link } from "react-router-dom";
@@ -56,6 +56,7 @@ const RegisterPage = () => {
 	const location = useLocation();
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const status = useSelector((state) => state.error.status);
 	return (
 		<LogInContainer>
 			<Formik
@@ -168,13 +169,9 @@ const RegisterPage = () => {
 							</Link>
 						</MessageRegister>
 						<Button text="Registrarse" isSubmitting={isSubmitting} />
-						{/* {
-                            (errorAuth) ? 
-                                <ErrorLogIn>
-                                    Correo o Contraseña invalido
-                                </ErrorLogIn>
-                                :null
-                        } */}
+						{status ? (
+							<ErrorLogIn>Correo o Contraseña invalido</ErrorLogIn>
+						) : null}
 					</FormStyle>
 				)}
 			</Formik>

@@ -56,7 +56,7 @@ export const updateFeed = (data) => {
 			const res = await axios.put(`${URL}/feeds/`, data, tokenConfig(getState));
 			dispatch({
 				type: UPDATE_FEED,
-				payload: data,
+				payload: res.data,
 			});
 		} catch (error) {
 			dispatch(returnErrors(error.response.data, error.response.status));

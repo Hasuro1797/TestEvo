@@ -55,7 +55,7 @@ const LoginPage = () => {
 	const location = useLocation();
 	const history = useHistory();
 	const dispatch = useDispatch();
-	// const errorAuth = useSelector(state => state.errorAuth)
+	const status = useSelector((state) => state.error.status);
 	return (
 		<LogInContainer>
 			<Formik
@@ -132,13 +132,9 @@ const LoginPage = () => {
 							</Link>
 						</MessageRegister>
 						<Button text="Iniciar Sesion" isSubmitting={isSubmitting} />
-						{/* {
-                            (errorAuth) ? 
-                                <ErrorLogIn>
-                                    Correo o Contraseña invalido
-                                </ErrorLogIn>
-                                :null
-                        } */}
+						{status ? (
+							<ErrorLogIn>Correo o Contraseña invalido</ErrorLogIn>
+						) : null}
 					</FormStyle>
 				)}
 			</Formik>
