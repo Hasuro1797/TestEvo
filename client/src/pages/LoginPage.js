@@ -81,7 +81,10 @@ const LoginPage = () => {
 				}}
 				onSubmit={(valores, { setSubmitting }) => {
 					dispatch(logInUser(valores));
-					if (location.state?.from) history.push(location.state?.from);
+					if (location.state?.from) {
+						console.log("entro a este if", location.state.from);
+						history.push(location.state?.from);
+					}
 					setTimeout(() => {
 						setSubmitting(false);
 					}, 400);
