@@ -14,11 +14,11 @@ It is a CRUD app where you can modify, delete or add your publications.
 
 ### Front End:
 
-HTML, CSS, Javascript, React, Styled Components, Redux.
+HTML, CSS, Javascript, React(17.02), Redux.
 
 ### Back End:
 
-Express, Node JS, JWT, pcrypt, sequelize, PostSQL.
+Express, Node JS, JWT, Pcrypt, Sequelize, PostSQL.
 
 ## **Starting Instructions**
 
