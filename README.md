@@ -18,7 +18,7 @@ HTML, CSS, Javascript, React(17.02), Redux.
 
 ### Back End:
 
-Express(4.17), Node JS, JWT, pcrypt, sequelize, PostSQL.
+Express, Node JS, JWT, Pcrypt, Sequelize, PostSQL.
 
 ## **Starting Instructions**
 
